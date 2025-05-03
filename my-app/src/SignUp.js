@@ -7,13 +7,13 @@ function SignUp() {
     email: '',
     password: '',
     confirmPassword: '',
-    profilePicture: null,
   });
+
   const [passwordError, setPasswordError] = useState('');
   const [confirmPasswordError, setConfirmPasswordError] = useState('');
 
-  const goToURL = () => {
-    window.location.href = "/Menu";
+  const goToLogin = () => {
+    window.location.href = "/login";
   };
 
   const validatePassword = (password) => {
@@ -26,31 +26,22 @@ function SignUp() {
   };
 
   const handleChange = (e) => {
-    const { name, value, files } = e.target;
+    const { name, value } = e.target;
 
-    if (name === 'profilePicture') {
-      setFormData({ ...formData, [name]: files[0] });
-    } else {
-      setFormData({ ...formData, [name]: value });
+    setFormData({ ...formData, [name]: value });
 
-      if (name === 'password') {
-        setPasswordError(validatePassword(value));
-      }
+    if (name === 'password') {
+      setPasswordError(validatePassword(value));
+    }
 
-      if (name === 'confirmPassword') {
-        if (value !== formData.password) {
-          setConfirmPasswordError('Passwords do not match');
-        } else {
-          setConfirmPasswordError('');
-        }
-      }
+    if (name === 'confirmPassword') {
+      setConfirmPasswordError(value !== formData.password ? 'Passwords do not match' : '');
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validar contraseñas
     const passwordErr = validatePassword(formData.password);
     if (passwordErr) {
       setPasswordError(passwordErr);
@@ -62,55 +53,35 @@ function SignUp() {
       return;
     }
 
-    // Paso 1: Enviar datos de usuario (username, email, password)
-    const userData = {
-      username: formData.username,
-      email: formData.email,
-      password: formData.password,
-    };
+    if (!formData.username || !formData.email || !formData.password) {
+      alert('Please complete all required fields');
+      return;
+    }
 
     try {
-      const userResponse = await fetch('http://localhost:5000/api/v1/user/', {
+      // Registro del usuario
+      const registerResponse = await fetch('http://localhost:5000/api/v1/user/', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(userData),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          username: formData.username,
+          email: formData.email,
+          password: formData.password,
+        }),
       });
 
-      const userResult = await userResponse.json();
-      console.log('Usuario registrado:', userResult);
-
-      // Paso 2: Enviar foto de perfil si existe
-      if (formData.profilePicture) {
-        const formDataPicture = new FormData();
-        formDataPicture.append('profilePicture', formData.profilePicture);
-
-        // Recuperar el token de la cookie
-        const token = document.cookie
-          .split('; ')
-          .find(row => row.startsWith('auth_token='))
-          ?.split('=')[1];
-
-        if (token) {
-          const pictureResponse = await fetch('http://localhost:5000/api/v1/user/profile_picture/', {
-            method: 'PATCH',
-            headers: {
-              'Authorization': `Bearer ${token}`,  // Enviar el token en el header
-            },
-            body: formDataPicture,
-          });
-
-          const pictureResult = await pictureResponse.json();
-          console.log('Foto de perfil cargada:', pictureResult);
-        } else {
-          console.error('No se encontró el token de autenticación.');
-        }
+      if (!registerResponse.ok) {
+        const error = await registerResponse.json();
+        console.error('Error al registrar:', error);
+        throw new Error('Error en el registro');
       }
 
-      goToURL(); // Redirige si todo salió bien
+      // Redirige al login
+      goToLogin();
+
     } catch (error) {
-      console.error('Error al registrar:', error);
+      console.error('Error en el proceso:', error);
+      alert('Hubo un problema en el registro. Revisa los datos e inténtalo de nuevo.');
     }
   };
 
@@ -124,7 +95,7 @@ function SignUp() {
             <input type="text" name="username" onChange={handleChange} required />
           </label>
           <label>
-            Electronic address:
+            Email:
             <input type="email" name="email" onChange={handleChange} required />
           </label>
           <label>
@@ -132,17 +103,11 @@ function SignUp() {
             <input type="password" name="password" onChange={handleChange} required />
           </label>
           {passwordError && <p className="error">{passwordError}</p>}
-
           <label>
             Confirm Password:
             <input type="password" name="confirmPassword" onChange={handleChange} required />
           </label>
           {confirmPasswordError && <p className="error">{confirmPasswordError}</p>}
-
-          <label>
-            Profile photo:
-            <input type="file" name="profilePicture" accept="image/*" onChange={handleChange} />
-          </label>
 
           <button className="button" type="submit">Register</button>
         </form>
