@@ -157,6 +157,10 @@ function Menu() {
               Invite Users (comma separated usernames):
               <input type="text" name="invitedUsers" onChange={handleCreateChange} />
             </label>
+            <label>
+              Deadline:
+              <input type="date" name="deadline" className='deadline' onChange={handleCreateChange} required />
+            </label>
             <div className="modal-actions">
               <button type="submit" className="button">Submit</button>
               <button type="button" className="red_button" onClick={() => setShowCreateModal(false)}>Cancel</button>
