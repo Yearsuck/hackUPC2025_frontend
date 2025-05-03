@@ -47,6 +47,7 @@ function Login() {
   };
 
   return (
+    <div className='container-div'>
     <div className="form-container">
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
@@ -61,6 +62,7 @@ function Login() {
         {error && <p className="error">{error}</p>}
         <button className="button" type="submit">Login</button>
       </form>
+    </div>
     </div>
   );
 }

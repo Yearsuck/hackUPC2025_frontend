@@ -59,44 +59,42 @@ function InterestsForm() {
     }
 
     return (
-        <div className='interestsDiv'>
-            <div className='interests'>
-                <h1 className='interestsTitle'>Choose your preferences</h1>
+        <div className='interests'>
+            <h1 className='interestsTitle'>Choose your preferences</h1>
 
-                <form onSubmit={() => onSubmit()}>
-                    <label htmlFor='place' className='interestsLabel placeLabel'>What are you more into?</label>
-                    {error && (<label htmlFor='place' className='interestsLabel placeLabelError'><i>You must select at least one</i></label>)}
-                    <div className='placeDiv' id='place' name='place'>
-                        <div className={places.includes("beach") ? 'placeItemSelected' : 'placeItem'} onClick={() => onClickPlaces("beach")}>
-                            <h3>Beach</h3>
-                            <img src='https://media.gq.com.mx/photos/620e915c43f71a078a35533f/master/pass/playa.jpg' />
-                        </div>
-                        <div className={places.includes("mountain") ? 'placeItemSelected' : 'placeItem'} onClick={() => onClickPlaces("mountain")}>
-                            <h3>Mountain</h3>
-                            <img src='https://st3.idealista.com/news/archivos/styles/fullwidth_xl/public/2018-08/selva_de_tailandia.jpg?VersionId=aMXkAZ8SqV6OL7NwVSjLPS1cMwCTAexO&itok=yKqmBKu1' />
-                        </div>
-                        <div className={places.includes("village") ? 'placeItemSelected' : 'placeItem'} onClick={() => onClickPlaces("village")}>
-                            <h3>Village</h3>
-                            <img src='https://i0.wp.com/travelandleisure-es.com/wp-content/uploads/2024/04/Pueblo-Rustico.jpg?fit=2560%2C1714&ssl=1' />
-                        </div>
-                        <div className={places.includes("big city") ? 'placeItemSelected' : 'placeItem'} onClick={() => onClickPlaces("big city")}>
-                            <h3>Big city</h3>
-                            <img src='https://www.lagrietaonline.com/wp-content/uploads/2015/04/La-ciudad-la-gran-ciudad.jpg' />
-                        </div>
+            <form onSubmit={() => onSubmit()}>
+                <label htmlFor='place' className='interestsLabel placeLabel'>What are you more into?</label>
+                {error && (<label htmlFor='place' className='interestsLabel placeLabelError'><i>You must select at least one</i></label>)}
+                <div className='placeDiv' id='place' name='place'>
+                    <div className={places.includes("beach") ? 'placeItemSelected' : 'placeItem'} onClick={() => onClickPlaces("beach")}>
+                        <h3>Beach</h3>
+                        <img src='https://media.gq.com.mx/photos/620e915c43f71a078a35533f/master/pass/playa.jpg' />
                     </div>
-
-                    <label htmlFor="price" className='interestsLabel'>Max price (between 50 and 10000):</label>
-                    <div className='priceDiv'>
-                        <input type="range" className='priceRange' id="price" name="price" min="0" max="10000" onChange={(e) => onChangePrice(e.target.value)} value={price} />
-                        <input type='number' className='priceInput' min="0" max="10000" value={tempPrice} onChange={(e) => setTempPrice(e.target.value)} onMouseLeave={() => onChangePrice(tempPrice)} required />
+                    <div className={places.includes("mountain") ? 'placeItemSelected' : 'placeItem'} onClick={() => onClickPlaces("mountain")}>
+                        <h3>Mountain</h3>
+                        <img src='https://st3.idealista.com/news/archivos/styles/fullwidth_xl/public/2018-08/selva_de_tailandia.jpg?VersionId=aMXkAZ8SqV6OL7NwVSjLPS1cMwCTAexO&itok=yKqmBKu1' />
                     </div>
+                    <div className={places.includes("village") ? 'placeItemSelected' : 'placeItem'} onClick={() => onClickPlaces("village")}>
+                        <h3>Village</h3>
+                        <img src='https://i0.wp.com/travelandleisure-es.com/wp-content/uploads/2024/04/Pueblo-Rustico.jpg?fit=2560%2C1714&ssl=1' />
+                    </div>
+                    <div className={places.includes("big city") ? 'placeItemSelected' : 'placeItem'} onClick={() => onClickPlaces("big city")}>
+                        <h3>Big city</h3>
+                        <img src='https://www.lagrietaonline.com/wp-content/uploads/2015/04/La-ciudad-la-gran-ciudad.jpg' />
+                    </div>
+                </div>
 
-                    <label htmlFor='desc' className='interestsLabel'>Could you give as any other specifications?</label>
-                    <textarea className='descInput' id='desc' name='desc' placeholder='Ex: A beautiful city with great views and treking routes' onChange={(e) => setDesc(e.target.value)} required />
+                <label htmlFor="price" className='interestsLabel'>Max price (between 50 and 10000):</label>
+                <div className='priceDiv'>
+                    <input type="range" className='priceRange' id="price" name="price" min="0" max="10000" onChange={(e) => onChangePrice(e.target.value)} value={price} />
+                    <input type='number' className='priceInput' min="0" max="10000" value={tempPrice} onChange={(e) => setTempPrice(e.target.value)} onMouseLeave={() => onChangePrice(tempPrice)} required />
+                </div>
 
-                    <button type='submit' className='interestsButton'>Send preferences</button>
-                </form>
-            </div>
+                <label htmlFor='desc' className='interestsLabel'>Could you give as any other specifications?</label>
+                <textarea className='descInput' id='desc' name='desc' placeholder='Ex: A beautiful city with great views and treking routes' onChange={(e) => setDesc(e.target.value)} required />
+
+                <button type='submit' className='interestsButton'>Send preferences</button>
+            </form>
         </div>
     );
 }
