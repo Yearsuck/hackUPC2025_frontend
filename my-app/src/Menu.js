@@ -33,7 +33,6 @@ function Menu() {
 
   const fetchUserData = async (token) => {
     try {
-      // Obtener el usuario
       const userRes = await fetch('http://localhost:5000/api/v1/user/me', {
         method: 'GET',
         headers: {
@@ -48,7 +47,6 @@ function Menu() {
       const user = await userRes.json();
       setUsername(user.username);
 
-      // Obtener la foto de perfil
       const picRes = await fetch('http://localhost:5000/api/v1/user/profile_picture', {
         method: 'GET',
         headers: {
@@ -115,7 +113,7 @@ function Menu() {
     }
   };
 
-  const hovered = (isHovered) => {
+  const hoverImage = (isHovered) => {
     const profilePic = document.querySelector('.profile-pic');
     if (isHovered) {
       profilePic.style.transform = 'scale(1.1)';
@@ -132,70 +130,65 @@ function Menu() {
           src={profilePictureURL}
           alt="Profile"
           className="profile-pic"
-          onMouseEnter={() => hovered(true)}
-          onMouseLeave={() => hovered(false)}
+          onMouseEnter={() => hoverImage(true)}
+          onMouseLeave={() => hoverImage(false)}
           onClick={() => window.location.href = '/EditProfile'}
         />
       </div>
 
       <div className="menu-container">
-        <div className="group-list">
-          <div className="marquee">
-            <button className="group-item">Group 1</button>
-            <button className="group-item">Group 2</button>
-            <button className="group-item">Group 3</button>
-          </div>
-        </div>
+        <h1 className="main-title">LucidRoutes - Menu</h1>
+        <p className="subtitle">¡Crea tu grupo de viaje y comienza a planificar tu aventura!</p>
 
         <div className="group-actions">
           <button className="menu-button" onClick={() => setShowCreateModal(true)}>Create Group</button>
           <button className="menu-button" onClick={() => setShowJoinModal(true)}>Join Group</button>
         </div>
+
+        {showCreateModal && (
+          <div className="modal">
+            <form className="modal-content" onSubmit={handleCreateSubmit}>
+              <h2>Create Group</h2>
+              <label>
+                Group Name:
+                <input type="text" name="groupName" onChange={handleCreateChange} required />
+              </label>
+              <label>
+                Description:
+                <textarea name="description" onChange={handleCreateChange} required />
+              </label>
+              <label>
+                Invite Users (comma separated usernames):
+                <input type="text" name="invitedUsers" onChange={handleCreateChange} />
+              </label>
+              <label>
+                Deadline:
+                <input type="date" name="deadline" className='deadline' onChange={handleCreateChange} required />
+              </label>
+              <div className="modal-actions">
+                <button type="submit" className="button">Submit</button>
+                <button type="button" className="red_button" onClick={() => setShowCreateModal(false)}>Cancel</button>
+              </div>
+            </form>
+          </div>
+        )}
+
+        {showJoinModal && (
+          <div className="modal">
+            <form className="modal-content" onSubmit={handleJoinSubmit}>
+              <h2>Join Group</h2>
+              <label>
+                Group Code:
+                <input type="text" value={joinCode} onChange={(e) => setJoinCode(e.target.value)} required />
+              </label>
+              <div className="modal-actions">
+                <button type="submit" className="button">Join</button>
+                <button type="button" className="red_button" onClick={() => setShowJoinModal(false)}>Cancel</button>
+              </div>
+            </form>
+          </div>
+        )}
       </div>
-
-      {showCreateModal && (
-        <div className="modal">
-          <form className="modal-content" onSubmit={handleCreateSubmit}>
-            <h2>Create Group</h2>
-            <label>
-              Group Name:
-              <input type="text" name="groupName" onChange={handleCreateChange} required />
-            </label>
-            <label>
-              Description:
-              <textarea name="description" onChange={handleCreateChange} required />
-            </label>
-            <label>
-              Invite Users (comma separated usernames):
-              <input type="text" name="invitedUsers" onChange={handleCreateChange} />
-            </label>
-            <label>
-              Deadline:
-              <input type="date" name="deadline" className='deadline' onChange={handleCreateChange} required />
-            </label>
-            <div className="modal-actions">
-              <button type="submit" className="button">Submit</button>
-              <button type="button" className="red_button" onClick={() => setShowCreateModal(false)}>Cancel</button>
-            </div>
-          </form>
-        </div>
-      )}
-
-      {showJoinModal && (
-        <div className="modal">
-          <form className="modal-content" onSubmit={handleJoinSubmit}>
-            <h2>Join Group</h2>
-            <label>
-              Group Code:
-              <input type="text" value={joinCode} onChange={(e) => setJoinCode(e.target.value)} required />
-            </label>
-            <div className="modal-actions">
-              <button type="submit" className="button">Join</button>
-              <button type="button" className="red_button" onClick={() => setShowJoinModal(false)}>Cancel</button>
-            </div>
-          </form>
-        </div>
-      )}
     </div>
   );
 }
