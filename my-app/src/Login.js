@@ -23,7 +23,7 @@ function Login() {
     }
 
     try {
-      const response = await fetch('https://api.placeholder.com/login', {
+      const response = await fetch('http://localhost:5000/api/v1/user/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
@@ -35,7 +35,12 @@ function Login() {
 
       const result = await response.json();
       console.log('Logged in:', result);
-      window.location.href = '/Home';
+
+      // Guardar el token en las cookies
+      document.cookie = `auth_token=${result.token}; path=/; secure; samesite=strict`;
+
+      // Redirigir al menú
+      window.location.href = '/Menu';
     } catch (err) {
       setError(err.message || 'Login failed');
     }

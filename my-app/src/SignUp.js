@@ -6,14 +6,14 @@ function SignUp() {
     username: '',
     email: '',
     password: '',
-    confirmPassword: '', // Nuevo estado para confirmar la contraseña
+    confirmPassword: '',
     profilePicture: null,
   });
   const [passwordError, setPasswordError] = useState('');
-  const [confirmPasswordError, setConfirmPasswordError] = useState(''); // Error para confirmar contraseña
+  const [confirmPasswordError, setConfirmPasswordError] = useState('');
 
   const goToURL = () => {
-    window.location.href = "/HowToLog";
+    window.location.href = "/Menu";
   };
 
   const validatePassword = (password) => {
@@ -62,21 +62,52 @@ function SignUp() {
       return;
     }
 
-    const data = new FormData();
-    data.append('username', formData.username);
-    data.append('email', formData.email);
-    data.append('password', formData.password);
-    if (formData.profilePicture) {
-      data.append('profilePicture', formData.profilePicture);
-    }
+    // Paso 1: Enviar datos de usuario (username, email, password)
+    const userData = {
+      username: formData.username,
+      email: formData.email,
+      password: formData.password,
+    };
 
     try {
-      const response = await fetch('https://tu-api.com/signup', {
+      const userResponse = await fetch('http://localhost:5000/api/v1/user/', {
         method: 'POST',
-        body: data,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
       });
-      const result = await response.json();
-      console.log('Registrado:', result);
+
+      const userResult = await userResponse.json();
+      console.log('Usuario registrado:', userResult);
+
+      // Paso 2: Enviar foto de perfil si existe
+      if (formData.profilePicture) {
+        const formDataPicture = new FormData();
+        formDataPicture.append('profilePicture', formData.profilePicture);
+
+        // Recuperar el token de la cookie
+        const token = document.cookie
+          .split('; ')
+          .find(row => row.startsWith('auth_token='))
+          ?.split('=')[1];
+
+        if (token) {
+          const pictureResponse = await fetch('http://localhost:5000/api/v1/user/profile_picture/', {
+            method: 'PATCH',
+            headers: {
+              'Authorization': `Bearer ${token}`,  // Enviar el token en el header
+            },
+            body: formDataPicture,
+          });
+
+          const pictureResult = await pictureResponse.json();
+          console.log('Foto de perfil cargada:', pictureResult);
+        } else {
+          console.error('No se encontró el token de autenticación.');
+        }
+      }
+
       goToURL(); // Redirige si todo salió bien
     } catch (error) {
       console.error('Error al registrar:', error);
@@ -113,7 +144,7 @@ function SignUp() {
             <input type="file" name="profilePicture" accept="image/*" onChange={handleChange} />
           </label>
 
-          <button className="button" type="submit">Registrarse</button>
+          <button className="button" type="submit">Register</button>
         </form>
       </div>
     </div>
