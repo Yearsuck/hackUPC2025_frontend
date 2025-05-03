@@ -53,7 +53,7 @@ function InterestsForm() {
                     'Authorization': `Bearer ${getCookie('auth_token')}`,
                 },
                 body: JSON.stringify(data),
-            }).then(() => redirect("./State"))
+            }).then(() => redirect("./End"))
                 .catch((err) => console.error(err));
         }
     }
