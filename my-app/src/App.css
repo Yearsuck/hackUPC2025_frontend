@@ -136,6 +136,16 @@
   margin-top: 20%;
 }
 
+.profile-container{
+  background: white;
+  padding: 4%;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+  width: 320px;
+  margin-top: 11%;
+  margin-bottom: 11%;
+}
+
 .container-div{
   height: 100vh;
 }

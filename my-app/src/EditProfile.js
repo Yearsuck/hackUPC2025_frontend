@@ -65,7 +65,7 @@ function EditProfile() {
   };
 
   return (
-    <div className="form-container">
+    <div className="profile-container">
       <h2>Edit Profile</h2>
       <form onSubmit={handleSubmit}>
         <label>
