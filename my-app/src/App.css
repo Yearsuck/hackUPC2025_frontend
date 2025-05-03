@@ -1,3 +1,5 @@
+/* App.css */
+
 .home-page {
   height: 100vh;
   margin: 0;
@@ -19,7 +21,7 @@
   top: 32%;
   left: 28%;
   background: white;
-  padding: 30px;
+  padding:30px;
   border-radius: 12px;
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
   width: 600px;
@@ -41,8 +43,7 @@
 .button {
   padding: 12px 24px;
   font-size: 16px;
-  background-color: #007BFF;
-  /* azul más fuerte para el botón */
+  background-color: #007BFF; /* azul más fuerte para el botón */
   color: white;
   border: none;
   border-radius: 8px;
@@ -58,8 +59,7 @@
 .red_button {
   padding: 12px 24px;
   font-size: 16px;
-  background-color: #ff0000;
-  /* rojo para el botón */
+  background-color: #ff0000; /* rojo para el botón */
   color: white;
   border: none;
   border-radius: 8px;
@@ -75,8 +75,7 @@
 .button-home {
   padding: 12px 24px;
   font-size: 30px;
-  background-color: #007BFF;
-  /* azul más fuerte para el botón */
+  background-color: #007BFF; /* azul más fuerte para el botón */
   color: white;
   border: none;
   border-radius: 8px;
@@ -137,7 +136,17 @@
   margin-top: 20%;
 }
 
-.container-div {
+.profile-container{
+  background: white;
+  padding: 4%;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+  width: 320px;
+  margin-top: 11%;
+  margin-bottom: 11%;
+}
+
+.container-div{
   height: 100vh;
 }
 
@@ -193,8 +202,7 @@ input[type="file"] {
 }
 
 .scrollable-group-container {
-  max-height: 300px;
-  /* o el tamaño que prefieras */
+  max-height: 300px; /* o el tamaño que prefieras */
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -202,16 +210,12 @@ input[type="file"] {
 }
 
 .group-item {
-  width: 94%;
-  /* Ancho completo */
-  height: 100px;
-  /* Alto fijo para cada grupo */
-  background-color: #f0f4ff;
-  /* Fondo blanco */
+  width: 94%; /* Ancho completo */
+  height: 100px; /* Alto fijo para cada grupo */
+  background-color: #f0f4ff; /* Fondo blanco */
   border: 2px #003366 solid;
   color: #003366;
-  border-radius: 10px;
-  /* Bordes redondeados */
+  border-radius: 10px; /* Bordes redondeados */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -222,7 +226,7 @@ input[type="file"] {
 .group-item:hover {
   background-color: #003366;
   color: #f0f4ff;
-  border: 2px solid #f0f4ff;
+  border: 2px solid #f0f4ff ;
 }
 
 .marquee {
@@ -230,7 +234,7 @@ input[type="file"] {
   flex-direction: column;
 }
 
-.group-container {
+.group-container{
   display: flex;
   flex-direction: horizontal;
   align-items: center;
@@ -242,15 +246,12 @@ input[type="file"] {
 
 .group-actions {
   background-color: #ffffff;
-  display: flex;
-  /* Fes servir Flexbox */
-  flex-direction: column;
-  /* En columna (vertical) */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;                /* Fes servir Flexbox */
+  flex-direction: column;       /* En columna (vertical) */
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
   border-radius: 10px;
   padding: 20px;
-  gap: 30px;
-  /* Espai entre els botons (opcional) */
+  gap: 30px;                    /* Espai entre els botons (opcional) */
 }
 
 .deadline {
@@ -263,7 +264,7 @@ input[type="file"] {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0,0,0,0.5);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -308,13 +309,13 @@ input[type="file"] {
   letter-spacing: 1px;
 }
 
-.container-menu {
+.container-menu{
   height: 100vh;
   width: 100vw;
   background-image: url(../public/FantasyClouds.gif);
 }
 
-.white-container {
+.white-container{
   background: white;
   padding: 3% 2%;
   border-radius: 12px;
@@ -326,12 +327,10 @@ input[type="file"] {
 
 .menu-title {
   font-size: 2rem;
-  top: 10%;
+  top : 10%;
   color: #0056b3;
-  margin: 0;
 }
-
-.group-list {
+ .group-list{
   overflow: auto;
   width: 50%;
   height: 350px;
@@ -340,25 +339,24 @@ input[type="file"] {
   border: #003366 3px solid;
   color: #003366;
   font-family: 'Franklin Gothic Medium';
-}
+ }
 
-.group-list::-webkit-scrollbar {
+ .group-list::-webkit-scrollbar {
   display: none;
 }
 
-.no-group {
+.no-group{
   margin: 5%;
 }
 
-.menu-p {
+.menu-p{
   margin-bottom: 5%;
 }
 
-.button-menu {
+ .button-menu {
   padding: 12px 24px;
   font-size: 40px;
-  background-color: #007BFF;
-  /* azul más fuerte para el botón */
+  background-color: #007BFF; /* azul más fuerte para el botón */
   color: white;
   border: none;
   border-radius: 8px;
@@ -371,7 +369,7 @@ input[type="file"] {
   background-color: #0056b3;
 }
 
-.groupDiv {
+.groupDiv{
   box-shadow: 0 2px 0 #003366 inset;
   margin: 0%;
   padding: 2%;
@@ -380,13 +378,13 @@ input[type="file"] {
   text-align: left;
 }
 
-.groupDiv:hover {
+.groupDiv:hover{
   background-color: #003366;
-  color: #f0f4ff
+  color: #f0f4ff;
 }
 
 .groupDiv p {
-  margin:0;
+  margin: 0;
 }
 
 .end-page{
