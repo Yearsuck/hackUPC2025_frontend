@@ -123,7 +123,8 @@ function Menu() {
   }
 
   return (
-    <div className="menu-page">
+    <div className='container-menu'>
+      <div className='white-container'>
       <div className="top-right">
         <span className="username">{username}</span>
         <img
@@ -136,42 +137,46 @@ function Menu() {
         />
       </div>
 
-      <div className="menu-container">
-        <h1 className="main-title-menu">LucidRoutes - Menu</h1>
-        <p className="subtitle_menu">¡Crea tu grupo de viaje y comienza a planificar tu aventura!</p>
+      <div>
+        <h1 className='menu-title'>LucidRoutes - Menu</h1>
+        <p>¡Crea tu grupo de viaje y comienza a planificar tu aventura!</p>
 
-        <div className="group-actions">
-          <button className="menu-button" onClick={() => setShowCreateModal(true)}>Create Group</button>
-          <button className="menu-button" onClick={() => setShowJoinModal(true)}>Join Group</button>
-        </div>
-
-        {showCreateModal && (
-          <div className="modal">
-            <form className="modal-content" onSubmit={handleCreateSubmit}>
-              <h2>Create Group</h2>
-              <label>
-                Group Name:
-                <input type="text" name="groupName" onChange={handleCreateChange} required />
-              </label>
-              <label>
-                Description:
-                <textarea name="description" onChange={handleCreateChange} required />
-              </label>
-              <label>
-                Invite Users (comma separated usernames):
-                <input type="text" name="invitedUsers" onChange={handleCreateChange} />
-              </label>
-              <label>
-                Deadline:
-                <input type="date" name="deadline" className='deadline' onChange={handleCreateChange} required />
-              </label>
-              <div className="modal-actions">
-                <button type="submit" className="button">Submit</button>
-                <button type="button" className="red_button" onClick={() => setShowCreateModal(false)}>Cancel</button>
-              </div>
-            </form>
+        <div className="group-container">
+          <div className="group-list">
           </div>
-        )}
+
+          <div className="group-actions">
+            <button className= 'button-menu' onClick={() => setShowCreateModal(true)}>Create Group</button>
+            <button className= 'button-menu' onClick={() => setShowJoinModal(true)}>Join Group</button>
+          </div>
+        </div>
+          {showCreateModal && (
+            <div className="modal">
+              <form className="modal-content" onSubmit={handleCreateSubmit}>
+                <h2>Create Group</h2>
+                <label>
+                  Group Name:
+                  <input type="text" name="groupName" onChange={handleCreateChange} required />
+                </label>
+                <label>
+                  Description:
+                  <textarea name="description" onChange={handleCreateChange} required />
+                </label>
+                <label>
+                  Invite Users (comma separated usernames):
+                  <input type="text" name="invitedUsers" onChange={handleCreateChange} />
+                </label>
+                <label>
+                  Deadline:
+                  <input type="date" name="deadline" className='deadline' onChange={handleCreateChange} required />
+                </label>
+                <div className="modal-actions">
+                  <button type="submit" className="button">Submit</button>
+                  <button type="button" className="red_button" onClick={() => setShowCreateModal(false)}>Cancel</button>
+                </div>
+              </form>
+            </div>
+          )}
 
         {showJoinModal && (
           <div className="modal">
@@ -188,6 +193,7 @@ function Menu() {
             </form>
           </div>
         )}
+      </div>
       </div>
     </div>
   );

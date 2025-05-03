@@ -191,20 +191,6 @@ input[type="file"] {
   border-radius: 50%;
 }
 
-.menu-container {
-  width: 100%;  /* Ancho completo */
-  height: 100%; /* Alto completo de la pantalla */
-  display: flex; 
-  flex-direction: column;  /* Puedes cambiarlo a 'row' si quieres que los elementos estén en fila */
-  justify-content: space-between; /* Centra los elementos verticalmente */
-  align-items: center; /* Centra los elementos horizontalmente */
-  background-color: #f0f4ff; /* Fondo suave */
-  padding: 20px;  /* Espaciado interior */
-  box-sizing: border-box;  /* Para que el padding no afecte el tamaño total */
-  flex-wrap: wrap;
-  border-radius: 15px;
-}
-
 .scrollable-group-container {
   max-height: 300px; /* o el tamaño que prefieras */
   overflow-y: auto;
@@ -233,51 +219,33 @@ input[type="file"] {
   border: 2px solid #f0f4ff ;
 }
 
-.group-list {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40%; /* Ancho completo */
-  height: 100%; /* Alto completo de la pantalla */
-  background-color: #fff; /* Fondo blanco */
-  border-radius: 15px; /* Bordes redondeados */
-  box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Sombra suave */
-  padding: 20px; /* Espaciado interior */
-  margin-bottom: 20px; /* Espacio entre grupos */
-}
-
 .marquee {
   width: 80%;
   flex-direction: column;
 }
 
-.group-actions {
+.group-container{
   display: flex;
-  flex-direction: column; /* Això els posa en columna */
-  align-items: center; /* Centrat horitzontalment */
-  gap: 10px; /* Espai vertical entre els botons */
-  margin-top: 18%;
-  margin-bottom: 10px;
+  flex-direction: horizontal;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 5px;
+}
+
+.group-actions {
+  background-color: #ffffff;
+  display: flex;                /* Fes servir Flexbox */
+  flex-direction: column;       /* En columna (vertical) */
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  border-radius: 10px;
+  padding: 20px;
+  gap: 30px;                    /* Espai entre els botons (opcional) */
 }
 
 .deadline {
   padding: 8px;
-}
-
-.menu-button {
-  padding: 15px 30px;
-  font-size: 40px;
-  background-color: #003366;
-  color: rgb(255, 255, 255);
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  margin: 30px 50px;
-  width: 100%; 
-}
-
-.menu-button:hover {
-  background-color: #0055aa;
 }
 
 .modal {
@@ -331,24 +299,43 @@ input[type="file"] {
   letter-spacing: 1px;
 }
 
-.main-title-menu {
-  font-size: 3rem;
-  color: #003366;
-  margin-bottom: 1rem;
-  letter-spacing: 1px;
-  justify-self: center;
+.container-menu{
+  height: 100vh;
+  width: 100vw;
+  background-image: url(../public/FantasyClouds.gif);
 }
 
-.menu-page {
-  font-size: 1.2rem;
-  color: #336699;
-  margin-bottom: 3rem;
+.white-container{
+  background: white;
+  padding: 10%;
+  border-radius: 12px;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  margin-left: 2%;
+  margin-right: 2%;
 }
 
-.subtitle_menu {
-  font-size: 1rem;
-  color: #336699;
-  position: relative; 
-  left: 49%;
-  bottom: 70%;
+.menu-title {
+  font-size: 2rem;
+  top : 10%;
+  color: #0056b3;
+}
+ .group-list{
+  overflow: auto;
+ }
+
+ .button-menu {
+  padding: 12px 24px;
+  font-size: 40px;
+  background-color: #007BFF; /* azul más fuerte para el botón */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.button-menu:hover {
+  background-color: #0056b3;
 }
