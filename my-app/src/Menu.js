@@ -13,7 +13,9 @@ function Menu() {
   const [joinCode, setJoinCode] = useState('');
   const [username, setUsername] = useState('');
   const [profilePictureURL, setProfilePictureURL] = useState('/default_image.jpeg');
-  const [groups, setGroups] = useState([{name: "prueba1", code: "1234"}, {name: "prueba1", code: "1234"}, {name: "prueba1", code: "1234"}, {name: "prueba1", code: "1234"}, {name: "prueba1", code: "1234"}, {name: "prueba1", code: "1234"}, {name: "prueba1", code: "1234"}, {name: "prueba1", code: "1234"}]);
+  const [groups, setGroups] = useState([
+    // { name: "prueba1", code: "1234", pendingUsers: ["alex"] }, { name: "prueba1", code: "1234" }, { name: "prueba1", code: "1234" }, { name: "prueba1", code: "1234" }, { name: "prueba1", code: "1234" }, { name: "prueba1", code: "1234" }, { name: "prueba1", code: "1234" }, { name: "prueba1", code: "1234" }
+  ]);
 
   const navigate = useNavigate();
 
@@ -91,8 +93,9 @@ function Menu() {
   const handleCreateSubmit = async (e) => {
     e.preventDefault();
     const token = getCookie('auth_token');
+
     try {
-      await fetch('http://localhost:5000/api/v1/group', {
+      const response = await fetch('http://localhost:5000/api/v1/group', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -100,7 +103,10 @@ function Menu() {
         },
         body: JSON.stringify(createData),
       });
+
       setShowCreateModal(false);
+      navigate("../InterestsForm", { state: response.json() });
+
     } catch (err) {
       console.error('Create group failed:', err);
     }
@@ -110,7 +116,7 @@ function Menu() {
     e.preventDefault();
     const token = getCookie('auth_token');
     try {
-      await fetch('http://localhost:5000/api/v1/group/enter', {
+      const response = await fetch('http://localhost:5000/api/v1/group/enter', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -119,6 +125,8 @@ function Menu() {
         body: JSON.stringify({ code: joinCode }),
       });
       setShowJoinModal(false);
+      navigate("../InterestsForm", { state: response.json() });
+
     } catch (err) {
       console.error('Join group failed:', err);
     }
@@ -157,16 +165,15 @@ function Menu() {
               {groups.length ?
                 groups.length && groups.map((group) => {
                   return (
-                    <div className='groupDiv' onClick={()=>{}}>
+                    <div className='groupDiv' onClick={() => { navigate("../End", { state: group }) }}>
                       <p>Name: {group.name}</p>
                       <p>Code: {group.code}</p>
                     </div>
                   )
                 })
                 :
-                (<p className='no-group'>There isn't any group yet.
-                  Click on "Create group" button to create your own group
-                  or "Join group" if any friend has created it an ask him for the code.</p>)
+                (<p className='no-group'>No groups found yet. Click 'Create Group' to start your own, or 'Join Group'
+                 if a friend already created one—just ask them for the code ;)</p>)
               }
             </div>
 

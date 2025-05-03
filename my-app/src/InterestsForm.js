@@ -1,8 +1,12 @@
-import { redirect } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import './Interest.css';
 import { useState } from 'react';
 
 function InterestsForm() {
+    const { state } = useLocation();
+    const navigate = useNavigate();
+    
     const [price, setPrice] = new useState(50);
     const [tempPrice, setTempPrice] = new useState(50);
     const [places, setPlaces] = new useState([]);
@@ -38,12 +42,13 @@ function InterestsForm() {
     }
 
     const onSubmit = () => {
-        if (places.length == 0) setError(true);
+        if (places.length === 0) setError(true);
         else {
             let data = {
                 places: places,
                 price: price,
-                desc: desc
+                desc: desc,
+                group_id: state.group_id
             }
 
             //TODO modificar endpoint
@@ -53,8 +58,8 @@ function InterestsForm() {
                     'Authorization': `Bearer ${getCookie('auth_token')}`,
                 },
                 body: JSON.stringify(data),
-            }).then(() => redirect("./End"))
-                .catch((err) => console.error(err));
+            }).then(() => navigate("../End", { state: state }))
+            .catch((err) => console.error(err));
         }
     }
 
