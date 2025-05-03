@@ -115,6 +115,15 @@ function Menu() {
     }
   };
 
+  const hovered = (isHovered) => {
+    const profilePic = document.querySelector('.profile-pic');
+    if (isHovered) {
+      profilePic.style.transform = 'scale(1.1)';
+    } else {
+      profilePic.style.transform = 'scale(1)';
+    }
+  }
+
   return (
     <div className="menu-page">
       <div className="top-right">
@@ -123,6 +132,9 @@ function Menu() {
           src={profilePictureURL}
           alt="Profile"
           className="profile-pic"
+          onMouseEnter={() => hovered(true)}
+          onMouseLeave={() => hovered(false)}
+          onClick={() => window.location.href = '/EditProfile'}
         />
       </div>
 
