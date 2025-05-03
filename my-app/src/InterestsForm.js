@@ -52,7 +52,7 @@ function InterestsForm() {
             }
 
             //TODO modificar endpoint
-            fetch('http://localhost:5000/api/v1/', {
+            fetch('http://localhost:5000/api/v1', {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${getCookie('auth_token')}`,
@@ -96,7 +96,7 @@ function InterestsForm() {
                 </div>
 
                 <label htmlFor='desc' className='interestsLabel'>Could you give as any other specifications?</label>
-                <textarea className='descInput' id='desc' name='desc' placeholder='Ex: A beautiful city with great views and treking routes' onChange={(e) => setDesc(e.target.value)} required />
+                <textarea className='descInput' id='desc' name='desc' placeholder='Ex: A beautiful city with great views and treking routes' onChange={(e) => setDesc(e.target.value)} required maxLength={500} />
 
                 <button type='submit' className='interestsButton'>Send preferences</button>
             </form>

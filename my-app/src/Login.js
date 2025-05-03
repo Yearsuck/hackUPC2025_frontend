@@ -36,10 +36,8 @@ function Login() {
       const result = await response.json();
       console.log('Logged in:', result);
 
-      // Guardar el token en las cookies
       document.cookie = `auth_token=${result.token}; path=/; secure; samesite=strict`;
 
-      // Redirigir al menú
       window.location.href = '/Menu';
     } catch (err) {
       setError(err.message || 'Login failed');

@@ -33,7 +33,7 @@ function Menu() {
       fetchUserData(token);
       fetchGroups(token);
     } else {
-      console.warn('Token no encontrado, redirigiendo a Login...');
+      console.warn('Token not found, redirecting to Login...');
       window.location.href = '/Login';
     }
   }, []);
@@ -48,7 +48,7 @@ function Menu() {
       });
 
       if (!userRes.ok) {
-        throw new Error(`Error al obtener usuario: ${userRes.status}`);
+        throw new Error(`Error fetching user: ${userRes.status}`);
       }
 
       const user = await userRes.json();
@@ -66,11 +66,11 @@ function Menu() {
         const imageUrl = URL.createObjectURL(blob);
         setProfilePictureURL(imageUrl);
       } else {
-        console.warn('No se encontró imagen de perfil, usando imagen por defecto');
+        console.warn('Profile image not found, using default image.');
         setProfilePictureURL('/default_image.jpeg');
       }
     } catch (error) {
-      console.error('Error al obtener datos del usuario:', error);
+      console.error('Error retrieving user data:', error);
     }
   };
 
@@ -86,7 +86,11 @@ function Menu() {
   };
 
   const handleCreateChange = (e) => {
-    const { name, value } = e.target;
+    let { name, value } = e.target;
+    if (name === 'deadline') {
+      const date = new Date(value);
+      value = date.toISOString();
+    }
     setCreateData({ ...createData, [name]: value });
   };
 
@@ -105,7 +109,7 @@ function Menu() {
       });
 
       setShowCreateModal(false);
-      navigate("../InterestsForm", { state: response.json() });
+      navigate("../InterestsForm", { state: await response.json() });
 
     } catch (err) {
       console.error('Create group failed:', err);
@@ -158,7 +162,7 @@ function Menu() {
 
         <div>
           <h1 className='menu-title'>LucidRoutes - Menu</h1>
-          <p className='menu-p'>¡Crea tu grupo de viaje y comienza a planificar tu aventura!</p>
+          <p className='menu-p'>Create your travel group and start planning your adventure!</p>
 
           <div className="group-container">
             <div className='group-list'>

@@ -59,8 +59,7 @@ function SignUp() {
     }
 
     try {
-      // Registro del usuario
-      const registerResponse = await fetch('http://localhost:5000/api/v1/user/', {
+      const registerResponse = await fetch('http://localhost:5000/api/v1/user', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -72,16 +71,15 @@ function SignUp() {
 
       if (!registerResponse.ok) {
         const error = await registerResponse.json();
-        console.error('Error al registrar:', error);
-        throw new Error('Error en el registro');
+        console.error('Error during registration:', error);
+        throw new Error('Error during registration');
       }
 
-      // Redirige al login
       goToLogin();
 
     } catch (error) {
-      console.error('Error en el proceso:', error);
-      alert('Hubo un problema en el registro. Revisa los datos e inténtalo de nuevo.');
+      console.error('Error during the proces:', error);
+      alert('There was a problem during registration. Please check your details and try again.');
     }
   };
 
