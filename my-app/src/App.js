@@ -5,6 +5,7 @@ import SignUp from './SignUp';
 import Login from './Login';
 import Menu from './Menu'; // Importa el component Menu
 import EditProfile from './EditProfile';
+import InterestsForm from './InterestsForm.js'; // Importa el component InterestsForm
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
         <Route path="/Login" element={<Login />} />
         <Route path="/Menu" element={<Menu />} /> {/* Ruta per al component Menu */}
         <Route path="/EditProfile" element={<EditProfile />} /> {/* Ruta per al component EditProfile */}
+        <Route path="/InterestsForm" element={<InterestsForm />} /> {/* Ruta per al component InterestsForm */}
       </Routes>
     </Router>
     </div>

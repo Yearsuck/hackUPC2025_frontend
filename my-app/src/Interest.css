@@ -1,0 +1,158 @@
+.interestsDiv{
+  height: auto;  
+  padding: 5%;
+  background-image: url(../public/FantasyClouds.gif);
+}
+
+.placeDiv {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.placeItem,
+.placeItemSelected {
+  width: 300px;
+  border: #003366 3px solid;
+  color: #003366;
+  border-radius: 15px;
+  margin: 20px;
+  background-color: #f0f4ff;
+}
+
+.placeItem:hover,
+.placeItemSelected:hover {
+  scale: calc(1.05);
+  transition: 0.5s;
+}
+
+.placeItemSelected {
+  border-color: #0056b3;
+  color: #0056b3;
+  box-shadow: 0px 5px 15px #5b97d8;
+}
+
+.placeDiv div img {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  border-radius: 13px;
+  align-items: end;
+  object-fit: cover;
+  bottom: -4px;
+}
+
+.interests {
+  margin: 5%;
+  background-color: #f0f4ff;
+  border-radius: 15px;
+}
+
+.interests>* {
+  margin: 5%;
+}
+
+.interestsTitle {
+  margin-top: 8%;
+  color: #003366;
+}
+
+.interestsLabel {
+  text-align: left;
+  margin-top: 8%;
+}
+
+.placeLabel {
+  margin-top: 5%;
+}
+
+.placeLabelError {
+  color: #b30000;
+  margin-top: 2%;
+  margin-left: 3%;
+}
+
+.priceDiv {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.priceRange {
+  -webkit-appearance: none;
+  accent-color: #0056b3;
+  width: 80%;
+  height: 5px;
+}
+
+
+.priceInput {
+  margin-left: 2%;
+  border-radius: 5px;
+  border: #0056b3 2px solid;
+  color: #0056b3;
+  width: 15%;
+  padding: 5px;
+  font-family: 'Franklin Gothic Medium';
+}
+
+.priceRange::-webkit-slider-runnable-track {
+  -webkit-appearance: none;
+  width: 300px;
+  height: 10px;
+  background: #ddd;
+  border: none;
+  border-radius: 3px;
+}
+
+.priceRange::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  border: none;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: #0056b3;
+  margin-top: -4px;
+}
+
+.priceRange::-webkit-slider-thumb:hover {
+  -webkit-appearance: none;
+  border: none;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: #003366;
+  margin-top: -4px;
+}
+
+.descInput {
+  border-radius: 5px;
+  border: #0056b3 2px solid;
+  color: #0056b3;
+  height: 50px;
+  width: 100%;
+  padding: 5px;
+  font-family: 'Franklin Gothic Medium';
+  font-size: medium;
+  margin-bottom: 5%;
+}
+
+.descInput:focus {
+  border: #0056b3 3px solid;
+  outline: none;
+}
+
+.interestsButton {
+  padding: 1%;
+  border-radius: 10px;
+  color: #fff;
+  border: #0055aa 3px solid;
+  background-color: #0055aa;
+  font-family: 'Franklin Gothic Medium';
+  font-size: medium;
+}
+
+.interestsButton:hover {
+  background-color: #003366;
+  border: #003366 3px solid;
+}

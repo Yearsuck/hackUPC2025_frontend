@@ -137,8 +137,8 @@ function Menu() {
       </div>
 
       <div className="menu-container">
-        <h1 className="main-title">LucidRoutes - Menu</h1>
-        <p className="subtitle">¡Crea tu grupo de viaje y comienza a planificar tu aventura!</p>
+        <h1 className="main-title-menu">LucidRoutes - Menu</h1>
+        <p className="subtitle_menu">¡Crea tu grupo de viaje y comienza a planificar tu aventura!</p>
 
         <div className="group-actions">
           <button className="menu-button" onClick={() => setShowCreateModal(true)}>Create Group</button>

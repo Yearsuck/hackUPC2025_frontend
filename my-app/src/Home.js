@@ -1,3 +1,4 @@
+import './Interest.css';
 import './App.css';
 
 function Home() {
