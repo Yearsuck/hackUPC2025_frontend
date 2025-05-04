@@ -75,14 +75,15 @@ function Menu() {
   };
 
   const fetchGroups = async (token) => {
-    fetch('http://localhost:5000/api/group', {
+    fetch('http://localhost:5000/api/v1/group', {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${token}`,
       },
+      credentials: 'include',
     }).then((rawData) => rawData)
       .then((jsonData) => setGroups(jsonData.json()))
-      .catch((err) => console.error("Error: ", err));
+      .catch((err) => console.error("Error in group: ", err));
   };
 
   const handleCreateChange = (e) => {
@@ -109,7 +110,8 @@ function Menu() {
       });
 
       setShowCreateModal(false);
-      navigate("../InterestsForm", { state: await response.json() });
+      console.log("Response:", createData);
+      navigate("../InterestsForm", { state: await response.json().group_id });
 
     } catch (err) {
       console.error('Create group failed:', err);
@@ -129,7 +131,7 @@ function Menu() {
         body: JSON.stringify({ code: joinCode }),
       });
       setShowJoinModal(false);
-      navigate("../InterestsForm", { state: response.json() });
+      navigate("../InterestsForm", { state: await response.json() });
 
     } catch (err) {
       console.error('Join group failed:', err);

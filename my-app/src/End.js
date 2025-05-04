@@ -1,4 +1,3 @@
-// End.jsx
 import { useLocation } from 'react-router-dom';
 import './App.css';
 
@@ -6,26 +5,12 @@ function End() {
     const { state } = useLocation();
     console.log(state);
 
-    //TODO modificar endpoint
-    const destinationData = () => {
-        if (state.pendingUsers.length) {
-            fetch('http://localhost:5000/api/v1/group/destination', {
-                method: 'GET',
-                headers: {
-                    // 'Authorization': `Bearer ${getCookie('auth_token')}`,
-                },
-            });
-        }
-    }
-
-    const destination = destinationData();
-
     return (
         <div className="end-page">
-            {destination ? (
+            {state.response ? (
                 <div className="result-container">
-                    <h1 className="destination-title">{destination.place?? "hola"}</h1>
-                    <p className="destination-description">{destination.description}</p>
+                    {/* <h1 className="destination-title">{destination.place ?? "hola"}</h1> */}
+                    <p className="destination-description">{state.response}</p>
                 </div>
             ) : (
                 <div className="waiting-message">
@@ -35,8 +20,8 @@ function End() {
                                 <details className="pending-users-dropdown">
                                     <summary>Pending users</summary>
                                     <ul>
-                                        {state.pendingUsers.map((user, index) => (
-                                            <li key={index}>{user}</li>
+                                        {state.users.map((user, index) => ( //puede que no sea users
+                                            <li className={index? 'greenUser':'redUser'}>{user}</li>
                                         ))}
                                     </ul>
                                 </details>

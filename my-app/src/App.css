@@ -341,6 +341,14 @@ input[type="file"] {
   font-family: 'Franklin Gothic Medium';
  }
 
+ .greenUsers{
+  background-color: rgb(141, 236, 141);
+ }
+
+ .redUsers{
+  background-color: rgb(236, 155, 141);
+ }
+
  .group-list::-webkit-scrollbar {
   display: none;
 }

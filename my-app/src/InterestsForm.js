@@ -32,11 +32,11 @@ function InterestsForm() {
         let found = false;
         let aux = [];
         places.map((item) => {
-            if (item != place) aux.push(item);
+            if (item !== place) aux.push(item);
             else found = true;
         });
         if (!found) aux.push(place);
-        if (aux.length == 0) setError(true)
+        if (aux.length === 0) setError(true)
         else setError(false)
         setPlaces(aux);
     }
@@ -45,21 +45,41 @@ function InterestsForm() {
         if (places.length === 0) setError(true);
         else {
             let data = {
+                group_id: state,
                 places: places,
                 price: price,
-                desc: desc,
-                group_id: state.group_id
+                description: desc
             }
 
             //TODO modificar endpoint
-            fetch('http://localhost:5000/api/v1', {
+            fetch('http://localhost:5000/api/v1/demand', {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${getCookie('auth_token')}`,
+                    'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(data),
-            }).then(() => navigate("../End", { state: state }))
-            .catch((err) => console.error(err));
+            }).then(() => navigate("../End", { state: state.data }))
+            .catch((err) => console.error(err))
+            .then(() => {
+                fetch('http://localhost:5000/api/v1/group', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${getCookie('auth_token')}`,
+                        'Content-Type': 'application/json',
+                      },
+                    body: JSON.stringify(data),
+                }).then((rawData) => rawData)
+                    .then((jsonData) => {
+                        const data = jsonData.json();
+                        let i = 0;
+                        while (data[i].group_id !== state) ++i;
+                        console.log(data[i])
+                        navigate("../End", { state: data[i] });
+                    })
+                    .catch((err) => console.error("Error: ", err));
+            })
+                .catch((err) => console.error(err));
         }
     }
 
@@ -68,8 +88,8 @@ function InterestsForm() {
             <h1 className='interestsTitle'>Choose your preferences</h1>
 
             <form onSubmit={() => onSubmit()}>
-                <label htmlFor='place' className='interestsLabel placeLabel'>What are you more into?</label>
-                {error && (<label htmlFor='place' className='interestsLabel placeLabelError'><i>You must select at least one</i></label>)}
+                <label className='intçrestsLabel placeLabel'>What are you more into?</label>
+                {error && (<label className='interestsLabel placeLabelError'><i>You must select at least one</i></label>)}
                 <div className='placeDiv' id='place' name='place'>
                     <div className={places.includes("beach") ? 'placeItemSelected' : 'placeItem'} onClick={() => onClickPlaces("beach")}>
                         <h3>Beach</h3>
